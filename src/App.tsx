@@ -1387,6 +1387,22 @@ export default function App() {
 
               <div className="space-y-5 overflow-y-auto max-h-[60vh] pr-1" dir="rtl">
                 
+                {/* Auto Cloud Build Announcement */}
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 space-y-2 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 bg-cyan-500 text-black text-[9px] font-bold px-2 py-0.5 rounded-br-lg uppercase font-sans tracking-wider">
+                    Cloud Compile 🚀
+                  </div>
+                  <h4 className="font-bold text-xs text-cyan-400 font-sans flex items-center gap-1.5 pt-1">
+                    <span>👑 مبرمج وجاهز: التجميع السحابي التلقائي مفعل!</span>
+                  </h4>
+                  <p className="text-xs text-gray-200 leading-relaxed font-sans">
+                    لقد قمنا بإعداد <strong>GitHub Actions Setup (.yml)</strong> تلقائي بالكامل ومدمج في شيفرتك البرمجية الحالية. وبجرد تصدير الكود إلى مستودعك الجديد في GitHub ومزامنته، سيقوم غيت هاب تلقائياً ببناء ملف الـ <strong>APK</strong> بأيقونة التاج الفضية الإمبراطورية الفاخرة التي اخترتها للتو!
+                  </p>
+                  <p className="text-[11px] text-gray-400 font-sans">
+                    💡 يمكنك تحميل الـ APK الجاهز من علامة تبويب <strong className="text-cyan-400">"Actions"</strong> مباشرة في مستودعك بمجرد انتهاء البناء التلقائي في غضون دقيقتين.
+                  </p>
+                </div>
+
                 {/* Step 1 */}
                 <div className="bg-[#0E1621]/80 rounded-xl p-4 border border-gray-800 space-y-2">
                   <div className="flex justify-between items-center">
@@ -1394,7 +1410,7 @@ export default function App() {
                     <h4 className="font-bold text-sm text-cyan-400 font-sans">1. تصدير الشيفرة البرمجية عبر GitHub</h4>
                   </div>
                   <p className="text-xs text-gray-300 leading-relaxed font-sans">
-                    لتتمكن من بناء أي تطبيق أندرويد، تحتاج أولاً لنسخ الكود الحالي إلى جهازك الشخصي أو حسابك الشخصي في جهة غيت هاب:
+                    لتتمكن من بناء أي تطبيق أندرويد تلقائياً أو يدوياً، تحتاج أولاً لنقل الكود والملفات الحالية إلى حسابك الشخصي في GitHub:
                   </p>
                   <ul className="text-xs text-gray-400 list-disc list-inside space-y-1.5 font-sans pr-2">
                     <li>اضغط على <strong>أيقونة التصدير أو الإعدادات</strong> في شريط أدوات Google AI Studio بأعلى الصفحة.</li>

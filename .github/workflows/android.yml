@@ -38,6 +38,10 @@ jobs:
         # Add android platform directory
         npx cap add android
 
+    - name: Generate Android Assets (Launcher Icons & Splash Screens)
+      run: |
+        npx @capacitor/assets generate --android
+
     - name: Sync Web Assets with Capacitor Android Bundle
       run: |
         npx cap sync android
