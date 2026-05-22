@@ -30,7 +30,8 @@ import {
   MessageSquare,
   BadgeAlert,
   Terminal,
-  Play
+  Play,
+  Smartphone
 } from "lucide-react";
 
 import { Developer, Channel, UserProfile, Message, ChannelPost } from "./types";
@@ -60,6 +61,7 @@ export default function App() {
 
   // Main UI Navigation
   const [activeTab, setActiveTab] = useState<"chats" | "channels" | "profile">("chats");
+  const [showAndroidGuideModal, setShowAndroidGuideModal] = useState<boolean>(false);
   
   // Data States
   const [developers, setDevelopers] = useState<Developer[]>(INITIAL_DEVELOPERS);
@@ -808,8 +810,16 @@ export default function App() {
                 </div>
 
                 <button
+                  onClick={() => setShowAndroidGuideModal(true)}
+                  className="w-full bg-[#2EA6DE]/15 hover:bg-[#2EA6DE]/25 border border-[#2EA6DE]/40 text-[#2EA6DE] py-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs font-bold transition-all mt-3 font-sans"
+                >
+                  <Smartphone className="w-4.5 h-4.5" />
+                  <span>تصدير التطبيق إلى Android 📱</span>
+                </button>
+
+                <button
                   onClick={handleLogout}
-                  className="w-full bg-red-950/20 hover:bg-red-950/45 border border-red-900/40 text-red-300 py-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs transition-all mt-4 font-sans"
+                  className="w-full bg-red-950/20 hover:bg-red-950/45 border border-red-900/40 text-red-300 py-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs transition-all mt-2 font-sans"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>تسجيل خروج السحب الآمن</span>
@@ -1347,6 +1357,157 @@ export default function App() {
         </main>
 
       </div>
+
+      {/* ANDROID EXPORT GUIDE MODAL */}
+      <AnimatePresence>
+        {showAndroidGuideModal && (
+          <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex justify-center items-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="w-full max-w-2xl bg-[#17212B] border border-cyan-500/30 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-amber-500" />
+              
+              <button
+                onClick={() => setShowAndroidGuideModal(false)}
+                className="absolute top-4 left-4 text-gray-400 hover:text-white cursor-pointer p-1.5 hover:bg-[#0E1621] rounded-full transition-all"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="text-center mb-6">
+                <div className="inline-flex w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/30 items-center justify-center mb-2 text-cyan-400">
+                  <Smartphone className="w-6 h-6 animate-bounce" />
+                </div>
+                <h3 className="font-bold text-xl text-white font-sans">تصدير TelegStudio إلى تطبيق Android (.APK)</h3>
+                <p className="text-xs text-gray-400 font-sans mt-1">دليل المطورين المتكامل لبناء وتغليف تطبيقات الويب لتعمل على الهواتف الذكية</p>
+              </div>
+
+              <div className="space-y-5 overflow-y-auto max-h-[60vh] pr-1" dir="rtl">
+                
+                {/* Step 1 */}
+                <div className="bg-[#0E1621]/80 rounded-xl p-4 border border-gray-800 space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] px-2 py-0.5 rounded-full font-sans font-bold">الخطوة الأولى</span>
+                    <h4 className="font-bold text-sm text-cyan-400 font-sans">1. تصدير الشيفرة البرمجية عبر GitHub</h4>
+                  </div>
+                  <p className="text-xs text-gray-300 leading-relaxed font-sans">
+                    لتتمكن من بناء أي تطبيق أندرويد، تحتاج أولاً لنسخ الكود الحالي إلى جهازك الشخصي أو حسابك الشخصي في جهة غيت هاب:
+                  </p>
+                  <ul className="text-xs text-gray-400 list-disc list-inside space-y-1.5 font-sans pr-2">
+                    <li>اضغط على <strong>أيقونة التصدير أو الإعدادات</strong> في شريط أدوات Google AI Studio بأعلى الصفحة.</li>
+                    <li>اختر <strong>Export to GitHub</strong> لربط مستودعك ونقل المشروع مباشرة بضغطة زر.</li>
+                    <li>أو اختر <strong>Download ZIP</strong> لتحميل الملفات بالكامل مضغوطة ومن ثم فك ضغطها على جهازك.</li>
+                  </ul>
+                </div>
+
+                {/* Step 2 */}
+                <div className="bg-[#0E1621]/80 rounded-xl p-4 border border-gray-800 space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] px-2 py-0.5 rounded-full font-sans font-bold">الخطوة الثانية</span>
+                    <h4 className="font-bold text-sm text-cyan-400 font-sans">2. دمج وتفعيل محرك Capacitor الذكي</h4>
+                  </div>
+                  <p className="text-xs text-gray-300 leading-relaxed font-sans">
+                    افتح نافذة الأوامر (Terminal) في مجلد مشروعك الذي قمت بتحميله، ثم قم بلصق الأوامر التالية خطوة بخطوة (انقر على السطر لنسخه مباشرة):
+                  </p>
+                  
+                  <div className="space-y-2 pt-1 font-mono text-xs">
+                    <div 
+                      onClick={() => {
+                        navigator.clipboard.writeText("npm install @capacitor/core @capacitor/cli");
+                        alert("تم نسخ الأمر بنجاح!");
+                      }}
+                      className="bg-[#050C14] border border-cyan-950 hover:bg-cyan-950/20 p-2.5 rounded-xl flex justify-between items-center text-left cursor-pointer group transition-all"
+                      dir="ltr"
+                    >
+                      <span className="text-cyan-400 font-medium">npm install @capacitor/core @capacitor/cli</span>
+                      <span className="text-[10px] text-gray-500 group-hover:text-cyan-400">انسخ 📋</span>
+                    </div>
+
+                    <div 
+                      onClick={() => {
+                        navigator.clipboard.writeText('npx cap init "TelegStudio" "com.watan.telegstudio" --web-dir=dist');
+                        alert("تم نسخ الأمر بنجاح!");
+                      }}
+                      className="bg-[#050C14] border border-cyan-950 hover:bg-cyan-950/20 p-2.5 rounded-xl flex justify-between items-center text-left cursor-pointer group transition-all"
+                      dir="ltr"
+                    >
+                      <span className="text-amber-400 font-medium">npx cap init "TelegStudio" "com.watan.telegstudio" --web-dir=dist</span>
+                      <span className="text-[10px] text-gray-500 group-hover:text-amber-400">انسخ 📋</span>
+                    </div>
+
+                    <div 
+                      onClick={() => {
+                        navigator.clipboard.writeText("npm install @capacitor/android && npx cap add android");
+                        alert("تم نسخ الأمر بنجاح!");
+                      }}
+                      className="bg-[#050C14] border border-cyan-950 hover:bg-cyan-950/20 p-2.5 rounded-xl flex justify-between items-center text-left cursor-pointer group transition-all"
+                      dir="ltr"
+                    >
+                      <span className="text-emerald-400 font-medium font-bold">npm install @capacitor/android && npx cap add android</span>
+                      <span className="text-[10px] text-gray-500 group-hover:text-emerald-400">انسخ 📋</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="bg-[#0E1621]/80 rounded-xl p-4 border border-gray-800 space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] px-2 py-0.5 rounded-full font-sans font-bold">الخطوة الثالثة</span>
+                    <h4 className="font-bold text-sm text-cyan-400 font-sans">3. المزامنة واستخراج ملف APK</h4>
+                  </div>
+                  <p className="text-xs text-gray-300 leading-relaxed font-sans">
+                    الآن قم ببناء واجهة الويب النهائية ومزامنتها على الهاتف ثم افتحها باستخدام برنامج Android Studio لبناء النسخة:
+                  </p>
+
+                  <div className="space-y-2 pt-1 font-mono text-xs">
+                    <div 
+                      onClick={() => {
+                        navigator.clipboard.writeText("npm run build && npx cap sync");
+                        alert("تم نسخ أمر التجميع والمزامنة بنجاح!");
+                      }}
+                      className="bg-[#050C14] border border-cyan-950 hover:bg-cyan-950/20 p-2.5 rounded-xl flex justify-between items-center text-left cursor-pointer group transition-all"
+                      dir="ltr"
+                    >
+                      <span className="text-indigo-400 font-medium">npm run build && npx cap sync</span>
+                      <span className="text-[10px] text-gray-500 group-hover:text-indigo-400">انسخ 📋</span>
+                    </div>
+
+                    <div 
+                      onClick={() => {
+                        navigator.clipboard.writeText("npx cap open android");
+                        alert("تم نسخ أمر فتح مشغل أندرويد بنجاح!");
+                      }}
+                      className="bg-[#050C14] border border-cyan-950 hover:bg-cyan-950/20 p-2.5 rounded-xl flex justify-between items-center text-left cursor-pointer group transition-all"
+                      dir="ltr"
+                    >
+                      <span className="text-pink-400 font-medium">npx cap open android</span>
+                      <span className="text-[10px] text-gray-500 group-hover:text-pink-400">انسخ 📋</span>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-gray-400 leading-relaxed font-sans pt-1">
+                    💡 بعد تشغيل <code className="text-white">npx cap open android</code> سيفتح برنامج <strong>Android Studio</strong> تلقائياً. اذهب إلى القائمة العلوية واضغط على <strong>Build</strong> ثم <strong>Build Bundle(s) / APK(s)</strong> ثم اختر <strong>Build APK</strong>. سيتم توليد تطبيقك الفعلي بنجاح!
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="flex justify-center pt-5 mt-2 border-t border-gray-800">
+                <button
+                  onClick={() => setShowAndroidGuideModal(false)}
+                  className="px-8 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-sans font-bold text-xs rounded-xl cursor-pointer transition-all shadow-md hover:scale-[1.02]"
+                >
+                  حسناً، فهمت الطريقة!
+                </button>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* CREATE CHANNEL MODAL POPUP DIALOG */}
       <AnimatePresence>
