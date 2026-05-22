@@ -1,0 +1,10 @@
+{
+  "name": "Google Studio Telegram",
+  "description": "منصة تواصل ومحاكاة للمطورين مبنية على واجهة تيليجرام المتقدمة ومجهّزة بذكاء اصطناعي من Google لمساعدة المبرمجين.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
