@@ -20,15 +20,10 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20
-        cache: 'npm'
 
     - name: Install project dependencies
       run: |
         npm install --legacy-peer-deps
-
-    - name: Install Capacitor CLI & Platform Packages
-      run: |
-        npm install @capacitor/core @capacitor/cli @capacitor/android --legacy-peer-deps
 
     - name: Build Web Application Assets
       run: |
