@@ -42,11 +42,11 @@ jobs:
       run: |
         npx cap sync android
 
-    - name: Set up JDK 17 for Gradle compilation
+    - name: Set up JDK 21 for Gradle compilation
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
-        java-version: '17'
+        java-version: '21'
 
     - name: Change permissions for Gradle Wrapper to executable
       run: chmod +x android/gradlew
